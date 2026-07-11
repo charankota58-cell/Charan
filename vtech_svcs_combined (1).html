@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V-Tech & SVCS Computer Institute — Solapur</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Hind',sans-serif;overflow-x:hidden;}
+
+/* ======= PRELOADER ======= */
+#loader{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity 0.6s;}
+#loader.hide{opacity:0;pointer-events:none;}
+.ld-title{font-family:'Baloo 2',cursive;font-size:36px;font-weight:800;letter-spacing:2px;}
+.ld-bar{width:220px;height:4px;background:rgba(255,255,255,0.15);border-radius:99px;overflow:hidden;}
+.ld-fill{height:100%;border-radius:99px;animation:lfill 2s ease forwards;}
+@keyframes lfill{from{width:0}to{width:100%}}
+.ld-sub{font-size:12px;letter-spacing:3px;text-transform:uppercase;opacity:0.45;}
+
+/* ======= SWITCHER BAR ======= */
+.switcher{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:stretch;height:60px;
+  box-shadow:0 2px 20px rgba(0,0,0,0.25);
+}
+.sw-half{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:14px;
+  cursor:pointer;transition:all 0.35s;padding:0 20px;
+  position:relative;
+}
+.sw-half.vt{background:#0A1628;}
+.sw-half.sc{background:#1a0a00;}
+.sw-half.vt.active{background:#FF6B00;}
+.sw-half.sc.active{background:#1565C0;}
+.sw-half:hover{opacity:0.9;}
+.sw-logo{
+  width:36px;height:36px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Baloo 2',cursive;font-size:14px;font-weight:800;color:white;
+  transition:background 0.35s;flex-shrink:0;
+}
+.sw-half.vt .sw-logo{background:rgba(255,255,255,0.15);}
+.sw-half.sc .sw-logo{background:rgba(255,255,255,0.15);}
+.sw-half.vt.active .sw-logo{background:rgba(255,255,255,0.25);}
+.sw-half.sc.active .sw-logo{background:rgba(255,255,255,0.25);}
+.sw-txt strong{display:block;font-family:'Baloo 2',cursive;font-size:15px;font-weight:800;color:white;line-height:1.2;}
+.sw-txt small{font-size:10px;color:rgba(255,255,255,0.55);letter-spacing:1.5px;text-transform:uppercase;}
+.sw-divider{width:2px;background:rgba(255,255,255,0.1);flex-shrink:0;}
+.sw-indicator{
+  position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:rgba(255,255,255,0.4);
+  transform:scaleX(0);transition:transform 0.35s;
+}
+.sw-half.active .sw-indicator{transform:scaleX(1);}
+
+/* ======= PAGES ======= */
+.page{display:none;}
+.page.active{display:block;}
+
+/* ======= COMMON NAV ======= */
+nav{
+  position:sticky;top:60px;z-index:100;
+  backdrop-filter:blur(16px);
+  padding:0 4%;height:58px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:2px solid currentColor;
+}
+nav.vt-nav{background:rgba(10,22,40,0.97);border-color:#FF6B00;}
+nav.sc-nav{background:rgba(21,101,192,0.97);border-color:#FFD700;}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nl-box{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Baloo 2',cursive;font-size:14px;font-weight:800;color:white;}
+.nl-box.vt{background:#FF6B00;}
+.nl-box.sc{background:rgba(255,255,255,0.2);}
+.nl-txt strong{display:block;font-family:'Baloo 2',cursive;font-size:15px;font-weight:800;color:white;}
+.nl-txt small{font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:1.5px;text-transform:uppercase;}
+.nav-links{display:flex;gap:24px;list-style:none;}
+.nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:13px;font-weight:500;transition:color 0.2s;}
+.nav-links a:hover{color:white;}
+.nav-call{padding:9px 18px;border-radius:9px;text-decoration:none;font-weight:700;font-size:13px;transition:all 0.2s;display:flex;align-items:center;gap:6px;}
+.nav-call.vt{background:#FF6B00;color:white;}
+.nav-call.sc{background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);}
+.nav-call:hover{opacity:0.85;transform:translateY(-1px);}
+
+/* ======= TICKER ======= */
+.ticker{padding:8px 0;overflow:hidden;}
+.ticker.vt-t{background:#FF6B00;}
+.ticker.sc-t{background:#FFD700;}
+.ticker-inner{display:flex;gap:60px;animation:tick 22s linear infinite;white-space:nowrap;}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker span{font-size:12px;font-weight:600;letter-spacing:0.5px;}
+.ticker.vt-t span{color:white;}
+.ticker.sc-t span{color:#0A1628;}
+.ticker span::before{content:"★  ";}
+.ticker.vt-t span::before{color:rgba(255,255,255,0.5);}
+.ticker.sc-t span::before{color:rgba(10,22,40,0.4);}
+
+/* ======= HERO ======= */
+.hero{min-height:calc(100vh - 118px);display:flex;align-items:center;padding:50px 4%;position:relative;overflow:hidden;}
+.hero.vt-hero{background:#0A1628;}
+.hero.sc-hero{background:#0D2137;}
+.hero-bg{position:absolute;inset:0;}
+.vt-hero .hero-bg{background:radial-gradient(ellipse 55% 65% at 75% 50%,rgba(255,107,0,0.12) 0%,transparent 65%),radial-gradient(ellipse 40% 50% at 15% 80%,rgba(255,107,0,0.07) 0%,transparent 55%);}
+.sc-hero .hero-bg{background:radial-gradient(ellipse 55% 65% at 75% 50%,rgba(21,101,192,0.2) 0%,transparent 65%),radial-gradient(ellipse 40% 50% at 15% 80%,rgba(255,215,0,0.07) 0%,transparent 55%);}
+.hero-particles{position:absolute;inset:0;overflow:hidden;}
+.particle{position:absolute;width:3px;height:3px;border-radius:50%;opacity:0.25;animation:fp 6s infinite ease-in-out;}
+@keyframes fp{0%,100%{transform:translateY(0);opacity:0.25}50%{transform:translateY(-28px);opacity:0.6}}
+.hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:50px;align-items:center;position:relative;z-index:2;width:100%;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;border:1px solid;padding:6px 16px;border-radius:99px;margin-bottom:20px;}
+.vt-hero .hero-tag{background:rgba(255,107,0,0.1);border-color:rgba(255,107,0,0.3);}
+.sc-hero .hero-tag{background:rgba(255,215,0,0.1);border-color:rgba(255,215,0,0.3);}
+.pulse-dot{width:7px;height:7px;border-radius:50%;animation:pd 2s infinite;}
+.vt-hero .pulse-dot{background:#FF6B00;}
+.sc-hero .pulse-dot{background:#FFD700;}
+@keyframes pd{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero-tag span{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;}
+.vt-hero .hero-tag span{color:#FF6B00;}
+.sc-hero .hero-tag span{color:#FFD700;}
+.hero h1{font-family:'Baloo 2',cursive;font-size:clamp(30px,4.2vw,54px);font-weight:800;color:white;line-height:1.1;margin-bottom:14px;}
+.hero h1 em.vt-em{color:#FF6B00;font-style:normal;}
+.hero h1 em.sc-em{color:#FFD700;font-style:normal;}
+.ai-badge{background:linear-gradient(135deg,#00c6ff,#0072ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-size:16px;color:rgba(255,255,255,0.58);line-height:1.7;margin-bottom:30px;max-width:480px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-primary{padding:13px 26px;border-radius:11px;font-weight:700;font-size:14px;text-decoration:none;border:none;cursor:pointer;font-family:'Hind',sans-serif;transition:all 0.25s;display:inline-flex;align-items:center;gap:7px;}
+.btn-primary.vt{background:#FF6B00;color:white;}
+.btn-primary.sc{background:#FFD700;color:#0A1628;}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,0.25);}
+.btn-ghost{padding:13px 26px;border-radius:11px;font-weight:600;font-size:14px;text-decoration:none;border:1.5px solid rgba(255,255,255,0.22);color:white;cursor:pointer;font-family:'Hind',sans-serif;transition:all 0.25s;}
+.btn-ghost:hover{border-color:white;}
+
+/* Hero Card */
+.hero-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:22px;padding:28px;}
+.inst-badge{border-radius:16px;padding:26px;text-align:center;margin-bottom:20px;position:relative;overflow:hidden;}
+.vt-hero .inst-badge{background:linear-gradient(135deg,#112240,#0a1628);border:2px solid #FF6B00;}
+.sc-hero .inst-badge{background:linear-gradient(135deg,#0a2d5e,#051428);border:2px solid #FFD700;}
+.inst-icon{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:26px;}
+.vt-hero .inst-icon{background:#FF6B00;}
+.sc-hero .inst-icon{background:#FFD700;}
+.inst-badge h2{font-family:'Baloo 2',cursive;font-size:17px;font-weight:800;color:white;margin-bottom:4px;}
+.inst-badge p{font-size:11px;letter-spacing:2px;text-transform:uppercase;}
+.vt-hero .inst-badge p{color:rgba(255,107,0,0.7);}
+.sc-hero .inst-badge p{color:rgba(255,215,0,0.7);}
+.inst-badge .sir-nm{font-size:13px;font-weight:600;margin-top:10px;}
+.vt-hero .inst-badge .sir-nm{color:#FF6B00;}
+.sc-hero .inst-badge .sir-nm{color:#FFD700;}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.stat-box{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 8px;text-align:center;}
+.stat-num{font-family:'Baloo 2',cursive;font-size:24px;font-weight:800;}
+.vt-hero .stat-num{color:#FF6B00;}
+.sc-hero .stat-num{color:#FFD700;}
+.stat-lbl{font-size:10px;color:rgba(255,255,255,0.38);margin-top:2px;letter-spacing:0.3px;}
+
+/* ======= SECTIONS ======= */
+section{padding:70px 4%;}
+.vt-sec{background:#F8F6F2;}
+.sc-sec{background:#F0F4FF;}
+.vt-sec-w{background:white;}
+.sc-sec-w{background:white;}
+.vt-sec-d{background:#0A1628;}
+.sc-sec-d{background:#0D2137;}
+
+.sec-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:99px;margin-bottom:12px;border:1px solid;}
+.vt-tag{background:rgba(255,107,0,0.08);color:#FF6B00;border-color:rgba(255,107,0,0.2);}
+.sc-tag{background:rgba(21,101,192,0.08);color:#1565C0;border-color:rgba(21,101,192,0.2);}
+.vt-tag-d{background:rgba(255,107,0,0.15);color:#FF8C38;border-color:rgba(255,107,0,0.3);}
+.sc-tag-d{background:rgba(255,215,0,0.15);color:#FFD700;border-color:rgba(255,215,0,0.3);}
+
+.sec-title{font-family:'Baloo 2',cursive;font-size:clamp(24px,3.2vw,40px);font-weight:800;line-height:1.15;margin-bottom:10px;}
+.dark-title{color:white;}
+.light-title{color:#0A1628;}
+.sec-sub{font-size:15px;line-height:1.7;}
+.dark-sub{color:rgba(255,255,255,0.5);}
+.light-sub{color:#6B7280;}
+.sec-head{text-align:center;margin-bottom:48px;}
+.sec-head .sec-sub{margin:0 auto;max-width:540px;}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity 0.6s,transform 0.6s;}
+.rv.in{opacity:1;transform:translateY(0);}
+.rvl{opacity:0;transform:translateX(-28px);transition:opacity 0.6s,transform 0.6s;}
+.rvl.in{opacity:1;transform:translateX(0);}
+.rvr{opacity:0;transform:translateX(28px);transition:opacity 0.6s,transform 0.6s;}
+.rvr.in{opacity:1;transform:translateX(0);}
+
+/* ======= COURSE CARDS ======= */
+.courses-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.c-card{border-radius:18px;overflow:hidden;border:1.5px solid;transition:all 0.3s;}
+.c-card.vt-card{border-color:rgba(255,107,0,0.15);}
+.c-card.sc-card{border-color:rgba(21,101,192,0.15);}
+.c-card:hover{transform:translateY(-5px);}
+.c-card.vt-card:hover{box-shadow:0 16px 44px rgba(255,107,0,0.12);border-color:#FF6B00;}
+.c-card.sc-card:hover{box-shadow:0 16px 44px rgba(21,101,192,0.12);border-color:#1565C0;}
+.c-head{padding:24px 26px 20px;position:relative;overflow:hidden;}
+.c-head::after{content:'';position:absolute;right:-16px;top:-16px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,0.07);}
+.c-head.o{background:linear-gradient(135deg,#FF6B00,#E64A00);}
+.c-head.b{background:linear-gradient(135deg,#1565C0,#0D47A1);}
+.c-head.n{background:linear-gradient(135deg,#112240,#0a1628);}
+.c-head.g{background:linear-gradient(135deg,#00897B,#004D40);}
+.c-icon{font-size:32px;margin-bottom:10px;display:block;}
+.c-head h3{font-family:'Baloo 2',cursive;font-size:20px;font-weight:800;color:white;}
+.c-head p{font-size:12px;color:rgba(255,255,255,0.65);margin-top:3px;}
+.c-badge{display:inline-block;background:rgba(255,255,255,0.18);color:white;font-size:10px;font-weight:700;padding:3px 10px;border-radius:99px;margin-top:8px;letter-spacing:1px;}
+.c-body{padding:22px 26px;background:white;}
+.c-features{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:18px;}
+.c-features li{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:#374151;line-height:1.5;}
+.c-features li::before{content:'✓';min-width:18px;height:18px;border-radius:50%;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.c-features.vt-f li::before{background:#FFF3E8;color:#FF6B00;}
+.c-features.sc-f li::before{background:#E3F2FD;color:#1565C0;}
+.c-fee-box{background:#F8F6F2;border-radius:10px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border:1px dashed;}
+.c-fee-box.vt-f{border-color:rgba(255,107,0,0.25);}
+.c-fee-box.sc-f{border-color:rgba(21,101,192,0.25);}
+.fee-lbl{font-size:11px;color:#9CA3AF;font-weight:500;}
+.fee-val{font-family:'Baloo 2',cursive;font-size:22px;font-weight:800;}
+.fee-val.vt{color:#FF6B00;}
+.fee-val.sc{color:#1565C0;}
+.fee-hint{font-size:10px;color:#9CA3AF;text-align:right;}
+
+/* ======= FEES SECTION ======= */
+.fees-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;}
+.fee-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:18px;overflow:hidden;}
+.fee-card-hd{padding:22px 26px;display:flex;align-items:center;gap:14px;}
+.fee-card-hd.vt{background:#FF6B00;}
+.fee-card-hd.sc{background:#1565C0;}
+.fee-card-hd .icon{font-size:28px;}
+.fee-card-hd h3{font-family:'Baloo 2',cursive;font-size:18px;font-weight:800;color:white;}
+.fee-card-hd p{font-size:12px;color:rgba(255,255,255,0.7);margin-top:2px;}
+.fee-card-bd{padding:22px 26px;}
+.f-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+.f-row:last-child{border:none;}
+.f-row-l{font-size:13px;color:rgba(255,255,255,0.6);}
+.f-row-v{font-family:'Baloo 2',cursive;font-size:17px;font-weight:800;}
+.f-row-v.vt{color:#FF8C38;}
+.f-row-v.sc{color:#64B5F6;}
+.f-total{border-radius:10px;padding:14px 18px;margin-top:14px;display:flex;justify-content:space-between;align-items:center;}
+.f-total.vt{background:rgba(255,107,0,0.1);border:1px solid rgba(255,107,0,0.2);}
+.f-total.sc{background:rgba(21,101,192,0.1);border:1px solid rgba(21,101,192,0.2);}
+.f-total-lbl{font-size:13px;color:rgba(255,255,255,0.45);font-weight:600;}
+.f-total-val{font-family:'Baloo 2',cursive;font-size:24px;font-weight:800;color:#FFD700;}
+.fee-note{margin-top:12px;font-size:12px;color:rgba(255,255,255,0.3);line-height:1.6;}
+
+/* ======= FEATURES GRID ======= */
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.feat-card{border-radius:16px;padding:24px 18px;text-align:center;border:1px solid;transition:all 0.3s;position:relative;overflow:hidden;}
+.feat-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;transform:scaleX(0);transition:transform 0.3s;transform-origin:left;}
+.feat-card:hover{transform:translateY(-4px);}
+.feat-card:hover::before{transform:scaleX(1);}
+.feat-card.vt{background:#FFF8F3;border-color:rgba(255,107,0,0.12);}
+.feat-card.vt::before{background:#FF6B00;}
+.feat-card.vt:hover{box-shadow:0 10px 32px rgba(255,107,0,0.1);}
+.feat-card.sc{background:#F0F6FF;border-color:rgba(21,101,192,0.12);}
+.feat-card.sc::before{background:#1565C0;}
+.feat-card.sc:hover{box-shadow:0 10px 32px rgba(21,101,192,0.1);}
+.feat-icon{font-size:32px;margin-bottom:12px;display:block;}
+.feat-card h4{font-family:'Baloo 2',cursive;font-size:14px;font-weight:700;color:#0A1628;margin-bottom:6px;}
+.feat-card p{font-size:12px;color:#6B7280;line-height:1.55;}
+
+/* ======= LOCATION CARD ======= */
+.loc-card{border-radius:20px;overflow:hidden;border:2px solid;transition:all 0.3s;max-width:620px;margin:0 auto;}
+.loc-card.vt{border-color:#FF6B00;}
+.loc-card.sc{border-color:#1565C0;}
+.loc-card:hover{transform:translateY(-4px);}
+.loc-card.vt:hover{box-shadow:0 16px 48px rgba(255,107,0,0.18);}
+.loc-card.sc:hover{box-shadow:0 16px 48px rgba(21,101,192,0.18);}
+.loc-head{padding:22px 28px;display:flex;align-items:center;gap:16px;}
+.loc-head.vt{background:linear-gradient(135deg,#FF6B00,#E64A00);}
+.loc-head.sc{background:linear-gradient(135deg,#1565C0,#0D47A1);}
+.loc-num{width:48px;height:48px;background:rgba(255,255,255,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Baloo 2',cursive;font-size:20px;font-weight:800;color:white;flex-shrink:0;}
+.loc-head h3{font-family:'Baloo 2',cursive;font-size:18px;font-weight:800;color:white;}
+.loc-head p{font-size:12px;color:rgba(255,255,255,0.7);margin-top:2px;}
+.loc-body{padding:24px 28px;background:white;}
+.loc-rows{display:flex;flex-direction:column;gap:14px;margin-bottom:20px;}
+.l-row{display:flex;align-items:flex-start;gap:12px;}
+.l-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.l-icon.vt{background:#FFF3E8;}
+.l-icon.sc{background:#E3F2FD;}
+.l-row strong{display:block;font-size:11px;color:#9CA3AF;font-weight:500;letter-spacing:0.5px;margin-bottom:2px;}
+.l-row span{font-size:14px;color:#1A1A2E;font-weight:500;line-height:1.5;}
+.call-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px;border-radius:12px;text-decoration:none;font-weight:800;font-size:16px;font-family:'Baloo 2',cursive;transition:all 0.2s;}
+.call-btn.vt{background:#FF6B00;color:white;}
+.call-btn.sc{background:#1565C0;color:white;}
+.call-btn:hover{opacity:0.9;transform:scale(1.02);}
+
+/* ======= ABOUT SIR ======= */
+.about-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:50px;align-items:center;}
+.sir-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:22px;padding:32px;text-align:center;}
+.sir-av{width:100px;height:100px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-family:'Baloo 2',cursive;font-size:34px;font-weight:800;color:white;border:3px solid rgba(255,255,255,0.2);}
+.sir-av.vt{background:linear-gradient(135deg,#FF6B00,#FF8C38);}
+.sir-av.sc{background:linear-gradient(135deg,#1565C0,#1976D2);}
+.sir-card h3{font-family:'Baloo 2',cursive;font-size:20px;font-weight:800;color:white;margin-bottom:5px;}
+.sir-deg{font-size:13px;font-weight:600;margin-bottom:14px;}
+.sir-deg.vt{color:#FF8C38;}
+.sir-deg.sc{color:#64B5F6;}
+.sir-exp{border-radius:10px;padding:14px;font-size:13px;color:rgba(255,255,255,0.65);line-height:1.7;}
+.sir-exp.vt{background:rgba(255,107,0,0.08);border:1px solid rgba(255,107,0,0.15);}
+.sir-exp.sc{background:rgba(21,101,192,0.08);border:1px solid rgba(21,101,192,0.2);}
+.about-text p{font-size:15px;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:20px;}
+.acc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.acc-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px;}
+.acc-num{font-family:'Baloo 2',cursive;font-size:26px;font-weight:800;}
+.acc-num.vt{color:#FF6B00;}
+.acc-num.sc{color:#FFD700;}
+.acc-lbl{font-size:12px;color:rgba(255,255,255,0.38);margin-top:3px;}
+
+/* ======= WHY LIST ======= */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.why-item{display:flex;align-items:flex-start;gap:12px;border-radius:14px;padding:18px;border:1px solid;transition:all 0.25s;}
+.why-item.vt{background:#FFF8F3;border-color:rgba(255,107,0,0.12);}
+.why-item.vt:hover{border-color:#FF6B00;background:#FFF3E8;}
+.why-item.sc{background:#F0F6FF;border-color:rgba(21,101,192,0.12);}
+.why-item.sc:hover{border-color:#1565C0;background:#E3F2FD;}
+.wi-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.wi-icon.vt{background:rgba(255,107,0,0.1);}
+.wi-icon.sc{background:rgba(21,101,192,0.1);}
+.why-item h4{font-family:'Baloo 2',cursive;font-size:14px;font-weight:700;color:#0A1628;margin-bottom:4px;}
+.why-item p{font-size:12px;color:#6B7280;line-height:1.55;}
+
+/* ======= CTA ======= */
+.cta-sec{padding:70px 4%;text-align:center;position:relative;overflow:hidden;}
+.cta-sec.vt{background:linear-gradient(135deg,#FF6B00,#E64A00);}
+.cta-sec.sc{background:linear-gradient(135deg,#1565C0,#0D47A1);}
+.cta-sec::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1.5' fill='rgba(255,255,255,0.08)'/%3E%3C/svg%3E");}
+.cta-sec h2{font-family:'Baloo 2',cursive;font-size:clamp(26px,3.5vw,44px);font-weight:800;color:white;margin-bottom:10px;position:relative;}
+.cta-sec p{font-size:16px;color:rgba(255,255,255,0.82);margin-bottom:10px;position:relative;}
+.cta-big{font-family:'Baloo 2',cursive;font-size:52px;font-weight:800;color:white;display:block;position:relative;text-decoration:none;}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;margin-top:24px;}
+.btn-wh{background:white;padding:14px 28px;border-radius:11px;font-weight:800;font-size:15px;text-decoration:none;transition:all 0.2s;font-family:'Baloo 2',cursive;display:inline-flex;align-items:center;gap:7px;}
+.btn-wh.vt{color:#FF6B00;}
+.btn-wh.sc{color:#1565C0;}
+.btn-wh:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,0.2);}
+.btn-ow{background:transparent;color:white;padding:14px 28px;border-radius:11px;font-weight:700;font-size:15px;text-decoration:none;border:2px solid rgba(255,255,255,0.45);transition:all 0.2s;font-family:'Baloo 2',cursive;}
+.btn-ow:hover{border-color:white;background:rgba(255,255,255,0.1);}
+
+/* ======= FOOTER ======= */
+footer{padding:50px 4% 24px;}
+footer.vt-f{background:#060E1C;}
+footer.sc-f{background:#060E1C;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px;}
+.f-brand p{color:rgba(255,255,255,0.38);font-size:13px;line-height:1.7;margin-top:12px;max-width:240px;}
+footer h4{font-family:'Baloo 2',cursive;color:white;font-size:14px;font-weight:700;margin-bottom:14px;}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.flinks a{color:rgba(255,255,255,0.38);text-decoration:none;font-size:13px;transition:color 0.2s;}
+.flinks.vt a:hover{color:#FF6B00;}
+.flinks.sc a:hover{color:#64B5F6;}
+.f-contact{display:flex;flex-direction:column;gap:10px;}
+.f-ct{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:rgba(255,255,255,0.4);line-height:1.5;}
+.foot-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.foot-bottom p{font-size:12px;color:rgba(255,255,255,0.22);}
+.cert-pills{display:flex;gap:8px;flex-wrap:wrap;}
+.cpill{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:99px;padding:5px 12px;font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:1px;}
+
+/* ======= RESPONSIVE ======= */
+@media(max-width:860px){
+  .hero-grid,.about-grid,.fees-grid{grid-template-columns:1fr;}
+  .hero-card{display:none;}
+  .nav-links{display:none;}
+  .courses-grid,.feat-grid,.why-grid,.acc-grid{grid-template-columns:1fr 1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:520px){
+  .courses-grid,.feat-grid,.why-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .switcher .sw-txt strong{font-size:12px;}
+}
+
+/* ======= SYLLABUS TABS ======= */
+.syl-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;}
+.syl-tab{padding:9px 20px;border-radius:9px;font-weight:600;font-size:13px;cursor:pointer;transition:all 0.2s;background:white;color:#6B7280;}
+.syl-tab.vt-tab{border:1.5px solid rgba(255,107,0,0.2);}
+.syl-tab.vt-tab.active{background:#FF6B00;color:white;border-color:#FF6B00;}
+.syl-tab.sc-tab{border:1.5px solid rgba(21,101,192,0.2);}
+.syl-tab.sc-tab.active{background:#1565C0;color:white;border-color:#1565C0;}
+.syl-tab:hover:not(.active){color:#0A1628;}
+.syl-content{display:none;}
+.syl-content.active{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.syl-item{background:white;border-radius:12px;padding:14px 16px;border:1px solid;display:flex;align-items:center;gap:10px;transition:all 0.2s;font-size:13px;font-weight:500;color:#1A1A2E;}
+.syl-item.vt{border-color:rgba(255,107,0,0.15);}
+.syl-item.vt:hover{border-color:#FF6B00;transform:translateX(4px);}
+.syl-item.sc{border-color:rgba(21,101,192,0.15);}
+.syl-item.sc:hover{border-color:#1565C0;transform:translateX(4px);}
+.syl-num{min-width:28px;height:28px;border-radius:7px;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.syl-num.vt{background:#FFF3E8;color:#FF6B00;}
+.syl-num.sc{background:#E3F2FD;color:#1565C0;}
+@media(max-width:620px){.syl-content.active{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="loader" style="background:#0A1628;">
+  <div class="ld-title" style="color:#FF6B00;">V-Tech & SVCS</div>
+  <div class="ld-bar"><div class="ld-fill" style="background:#FF6B00;"></div></div>
+  <div class="ld-sub" style="color:rgba(255,255,255,0.4);">Loading Excellence...</div>
+</div>
+
+<!-- ======= SWITCHER ======= -->
+<div class="switcher">
+  <div class="sw-half vt active" onclick="showPage('vt')">
+    <div class="sw-logo">VT</div>
+    <div class="sw-txt">
+      <strong>V-Tech Computer Institute</strong>
+      <small>MIDC Road, Nilam Nagar • Solapur</small>
+    </div>
+    <div class="sw-indicator"></div>
+  </div>
+  <div class="sw-divider"></div>
+  <div class="sw-half sc" onclick="showPage('sc')">
+    <div class="sw-logo">SC</div>
+    <div class="sw-txt">
+      <strong>S.V.C.S. D.Ed. College Computers</strong>
+      <small>Channeveer Nagar, Akkalkot Road • Solapur</small>
+    </div>
+    <div class="sw-indicator"></div>
+  </div>
+</div>
+
+<!-- ======================== PAGE: V-TECH ======================== -->
+<div class="page active" id="page-vt">
+
+  <!-- Ticker -->
+  <div class="ticker vt-t">
+    <div class="ticker-inner">
+      <span>प्रवेश सुरू — MS-CIT Batch 2025</span>
+      <span>Tally Prime with GST — नवीन Batch</span>
+      <span>CCTP Typing Proficiency</span>
+      <span>100% Job Readiness</span>
+      <span>MKCL व YCMOU मान्यताप्राप्त</span>
+      <span>संपर्क: 7875422159</span>
+      <span>V-Tech Computer Institute — MIDC Road, Solapur</span>
+      <span>प्रवेश सुरू — MS-CIT Batch 2025</span>
+      <span>Tally Prime with GST — नवीन Batch</span>
+      <span>CCTP Typing Proficiency</span>
+      <span>100% Job Readiness</span>
+      <span>MKCL व YCMOU मान्यताप्राप्त</span>
+      <span>संपर्क: 7875422159</span>
+      <span>V-Tech Computer Institute — MIDC Road, Solapur</span>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="vt-nav">
+    <div class="nav-logo">
+      <div class="nl-box vt">VT</div>
+      <div class="nl-txt">
+        <strong>V-Tech Computer Institute</strong>
+        <small>Solapur • MKCL Certified</small>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#vt-courses">Courses</a></li>
+      <li><a href="#vt-fees">Fees</a></li>
+      <li><a href="#vt-syllabus">Syllabus</a></li>
+      <li><a href="#vt-location">Location</a></li>
+      <li><a href="#vt-about">About</a></li>
+    </ul>
+    <a href="tel:7875422159" class="nav-call vt">📞 7875422159</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero vt-hero">
+    <div class="hero-bg"></div>
+    <div class="hero-particles" id="vt-particles"></div>
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tag">
+          <div class="pulse-dot"></div>
+          <span>प्रवेश सुरू — 2025</span>
+        </div>
+        <h1>
+          शिकूया <span class="ai-badge">AI</span>ची क्रांती,<br>
+          चला करूया <em class="vt-em">MS-CIT</em>
+        </h1>
+        <p class="hero-sub">आंतरराष्ट्रीय दर्जाचा परिपूर्ण संगणक कोर्स — 100% जॉब व करिअर + स्मार्ट अभ्यास रेडी. MKCL व YCMOU मान्यताप्राप्त संस्था.</p>
+        <div class="hero-btns">
+          <a href="#vt-courses" class="btn-primary vt">📚 Courses पाहा →</a>
+          <a href="tel:7875422159" class="btn-ghost">📞 Call करा</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="inst-badge">
+          <div class="inst-icon">🏆</div>
+          <h2>V-Tech Computer Institute</h2>
+          <p>MKCL • MSBTE • YCMOU Certified</p>
+          <div class="sir-nm">Kashinath Chappalge Sir (BCA, MCA, CA)</div>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-box"><div class="stat-num">25+</div><div class="stat-lbl">वर्षे अनुभव</div></div>
+          <div class="stat-box"><div class="stat-num">2 Cr+</div><div class="stat-lbl">Students</div></div>
+          <div class="stat-box"><div class="stat-num">100%</div><div class="stat-lbl">Job Ready</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses -->
+  <section class="vt-sec-w rv" id="vt-courses">
+    <div class="sec-head">
+      <div class="sec-tag vt-tag">Courses — V-Tech</div>
+      <h2 class="sec-title light-title">उत्कृष्ट प्रशिक्षण, उज्ज्वल भविष्य</h2>
+      <p class="sec-sub light-sub">MKCL, MSBTE आणि YCMOU मान्यताप्राप्त — सरकारी व खाजगी क्षेत्रात मान्यताप्राप्त प्रमाणपत्र.</p>
+    </div>
+    <div class="courses-grid">
+      <div class="c-card vt-card rv">
+        <div class="c-head o"><span class="c-icon">💻</span><h3>MS-CIT</h3><p>Maharashtra State Certificate in IT</p><span class="c-badge">MKCL Certified • Govt. Approved</span></div>
+        <div class="c-body">
+          <ul class="c-features vt-f">
+            <li>Windows 10, MS-Office 2019 — संपूर्ण</li>
+            <li>Google Tools आणि Smart Phone वापर</li>
+            <li>Internet, Email, Digital Banking</li>
+            <li>AI Tools — Artificial Intelligence परिचय</li>
+            <li>200+ Digital कौशल्यांचे प्रशिक्षण</li>
+            <li>शासकीय सेवेत प्रवेशासाठी अनिवार्य</li>
+          </ul>
+          <div class="c-fee-box vt-f"><div><div class="fee-lbl">Course Fee</div><div style="font-size:10px;color:#9CA3AF;">2 हप्त्यांत भरता येते</div></div><div><div class="fee-val vt">₹5,000</div><div class="fee-hint">किंवा 2×₹2,600</div></div></div>
+        </div>
+      </div>
+      <div class="c-card vt-card rv">
+        <div class="c-head b"><span class="c-icon">📊</span><h3>Tally Prime with GST</h3><p>Financial Accounting Complete Course</p><span class="c-badge">MKCL KLiC Diploma</span></div>
+        <div class="c-body">
+          <ul class="c-features vt-f">
+            <li>Introduction to Accounting & Tally Prime</li>
+            <li>GST Setup — GSTR1, GSTR2, GSTR3B</li>
+            <li>Company Data — Creation & Configuration</li>
+            <li>Statutory — TSS, TCS, TDS सर्व</li>
+            <li>Inventory, Order, Payroll Masters</li>
+            <li>Invoicing, Reports & Add-On Features</li>
+          </ul>
+          <div class="c-fee-box vt-f"><div><div class="fee-lbl">Course Fee</div><div style="font-size:10px;color:#9CA3AF;">2 हप्त्यांत भरता येते</div></div><div><div class="fee-val vt">₹5,000</div><div class="fee-hint">किंवा 2×₹2,600</div></div></div>
+        </div>
+      </div>
+      <div class="c-card vt-card rv">
+        <div class="c-head n"><span class="c-icon">⌨️</span><h3>CCTP — Typing Proficiency</h3><p>Certificate of Computer Typing Proficiency</p><span class="c-badge">MSBTE + MKCL Certified</span></div>
+        <div class="c-body">
+          <ul class="c-features vt-f">
+            <li>English Typing — 30 WPM</li>
+            <li>Marathi Typing — 40 WPM</li>
+            <li>Hindi Typing — 30 WPM</li>
+            <li>स्पीड, अचुकता व आत्मविश्वास प्रशिक्षण</li>
+            <li>MSBTE शासकीय प्रमाणपत्र</li>
+          </ul>
+          <div class="c-fee-box vt-f"><div><div class="fee-lbl">Course Fee</div><div style="font-size:10px;color:#9CA3AF;">MS-CIT सोबत उपलब्ध</div></div><div><div class="fee-val vt">₹5,000</div><div class="fee-hint">किंवा 2×₹2,600</div></div></div>
+        </div>
+      </div>
+      <div class="c-card vt-card rv">
+        <div class="c-head g"><span class="c-icon">👨‍💻</span><h3>Programming & KLiC</h3><p>C, C++, Java, Python, Mobile App Dev</p><span class="c-badge">KLiC BFSI • KLiC English • KLiC Digital</span></div>
+        <div class="c-body">
+          <ul class="c-features vt-f">
+            <li>C, C++, Java, Python Programming</li>
+            <li>Mobile App Development</li>
+            <li>Web Development — HTML, CSS, JS</li>
+            <li>Data Entry & Data Management</li>
+            <li>KLiC Personality Development</li>
+          </ul>
+          <div class="c-fee-box vt-f"><div><div class="fee-lbl">Course Fee</div><div style="font-size:10px;color:#9CA3AF;">विचारणा करा</div></div><div><div class="fee-val vt">₹5,000</div><div class="fee-hint">किंवा 2×₹2,600</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fees -->
+  <section class="vt-sec-d rv" id="vt-fees">
+    <div class="sec-head">
+      <div class="sec-tag vt-tag-d">Fees Structure</div>
+      <h2 class="sec-title dark-title">सोप्या हप्त्यांत शिका!</h2>
+      <p class="sec-sub dark-sub" style="margin:0 auto;max-width:500px;">एकत्र भरा किंवा 2 आरामदायक हप्त्यांत — कोणताही Hidden Charge नाही.</p>
+    </div>
+    <div class="fees-grid">
+      <div class="fee-card rv">
+        <div class="fee-card-hd vt"><div class="icon">💻</div><div><h3>MS-CIT / CCTP</h3><p>मुख्य Government Certified Courses</p></div></div>
+        <div class="fee-card-bd">
+          <div class="f-row"><div class="f-row-l">एकत्र (One-Time)</div><div class="f-row-v vt">₹5,000</div></div>
+          <div class="f-row"><div class="f-row-l">पहिला हप्ता (Admission वेळी)</div><div class="f-row-v vt">₹2,600</div></div>
+          <div class="f-row"><div class="f-row-l">दुसरा हप्ता (1 महिन्यानंतर)</div><div class="f-row-v vt">₹2,600</div></div>
+          <div class="f-total vt"><div class="f-total-lbl">एकूण शुल्क</div><div class="f-total-val">₹5,000</div></div>
+          <div class="fee-note">✓ SC/ST/OBC सवलत उपलब्ध &nbsp;|&nbsp; ✓ महिला विशेष सवलत &nbsp;|&nbsp; ✓ MKCL परीक्षा शुल्क वेगळे</div>
+        </div>
+      </div>
+      <div class="fee-card rv">
+        <div class="fee-card-hd vt"><div class="icon">📊</div><div><h3>Tally Prime / Programming</h3><p>Accounting व Job Readiness Courses</p></div></div>
+        <div class="fee-card-bd">
+          <div class="f-row"><div class="f-row-l">एकत्र (One-Time)</div><div class="f-row-v vt">₹5,000</div></div>
+          <div class="f-row"><div class="f-row-l">पहिला हप्ता (Admission वेळी)</div><div class="f-row-v vt">₹2,600</div></div>
+          <div class="f-row"><div class="f-row-l">दुसरा हप्ता (1 महिन्यानंतर)</div><div class="f-row-v vt">₹2,600</div></div>
+          <div class="f-total vt"><div class="f-total-lbl">एकूण शुल्क</div><div class="f-total-val">₹5,000</div></div>
+          <div class="fee-note">✓ MKCL KLiC Diploma मान्यताप्राप्त &nbsp;|&nbsp; ✓ Job Placement सहाय्य &nbsp;|&nbsp; ✓ Certificate मिळते</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Syllabus -->
+  <section class="vt-sec rv" id="vt-syllabus">
+    <div class="sec-head">
+      <div class="sec-tag vt-tag">अभ्यासक्रम</div>
+      <h2 class="sec-title light-title">काय शिकाल?</h2>
+    </div>
+    <div class="syl-tabs">
+      <button class="syl-tab vt-tab active" onclick="showSyl('vt','mscit',this)">MS-CIT</button>
+      <button class="syl-tab vt-tab" onclick="showSyl('vt','tally',this)">Tally Prime</button>
+      <button class="syl-tab vt-tab" onclick="showSyl('vt','cctp',this)">CCTP Typing</button>
+    </div>
+    <div class="syl-content active" id="vt-mscit">
+      <div class="syl-item vt"><div class="syl-num vt">01</div>Computer Basics & Windows 10</div>
+      <div class="syl-item vt"><div class="syl-num vt">02</div>MS Word 2019 — Document तयार करणे</div>
+      <div class="syl-item vt"><div class="syl-num vt">03</div>MS Excel 2019 — Spreadsheet & Formulas</div>
+      <div class="syl-item vt"><div class="syl-num vt">04</div>MS PowerPoint — Presentation Skills</div>
+      <div class="syl-item vt"><div class="syl-num vt">05</div>MS Access — Database Basics</div>
+      <div class="syl-item vt"><div class="syl-num vt">06</div>Internet & Email — Web Browsing</div>
+      <div class="syl-item vt"><div class="syl-num vt">07</div>Google Tools — Drive, Docs, Sheets</div>
+      <div class="syl-item vt"><div class="syl-num vt">08</div>Smart Phone — Apps & Digital Life</div>
+      <div class="syl-item vt"><div class="syl-num vt">09</div>Digital Banking & UPI Payments</div>
+      <div class="syl-item vt"><div class="syl-num vt">10</div>Cyber Security & Online Safety</div>
+      <div class="syl-item vt"><div class="syl-num vt">11</div>AI Tools — Artificial Intelligence परिचय</div>
+      <div class="syl-item vt"><div class="syl-num vt">12</div>E-Governance — Govt. Online Services</div>
+    </div>
+    <div class="syl-content" id="vt-tally">
+      <div class="syl-item vt"><div class="syl-num vt">01</div>Introduction to Accounting</div>
+      <div class="syl-item vt"><div class="syl-num vt">02</div>Tally Prime — Installation & Setup</div>
+      <div class="syl-item vt"><div class="syl-num vt">03</div>Company Data Creation & Configuration</div>
+      <div class="syl-item vt"><div class="syl-num vt">04</div>GST Setup & Transactions</div>
+      <div class="syl-item vt"><div class="syl-num vt">05</div>Accounting & Inventory Features</div>
+      <div class="syl-item vt"><div class="syl-num vt">06</div>TSS, TCS, TDS — Statutory</div>
+      <div class="syl-item vt"><div class="syl-num vt">07</div>GSTR1, GSTR2 & GSTR3B Reports</div>
+      <div class="syl-item vt"><div class="syl-num vt">08</div>Payroll Masters & Order Processing</div>
+      <div class="syl-item vt"><div class="syl-num vt">09</div>Menu Management, Vouchers</div>
+      <div class="syl-item vt"><div class="syl-num vt">10</div>Invoicing & Add-On Features</div>
+    </div>
+    <div class="syl-content" id="vt-cctp">
+      <div class="syl-item vt"><div class="syl-num vt">01</div>Keyboard Layout — Home Row Practice</div>
+      <div class="syl-item vt"><div class="syl-num vt">02</div>English Typing — 30 WPM Target</div>
+      <div class="syl-item vt"><div class="syl-num vt">03</div>Marathi Typing — 40 WPM Target</div>
+      <div class="syl-item vt"><div class="syl-num vt">04</div>Hindi Typing — 30 WPM Target</div>
+      <div class="syl-item vt"><div class="syl-num vt">05</div>Accuracy Training — Error Reduction</div>
+      <div class="syl-item vt"><div class="syl-num vt">06</div>MSBTE Exam Pattern & Mock Tests</div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="vt-sec-w rv">
+    <div class="sec-head">
+      <div class="sec-tag vt-tag">वैशिष्ट्ये</div>
+      <h2 class="sec-title light-title">V-Tech का निवडावे?</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card vt rv"><span class="feat-icon">🏢</span><h4>20 अद्ययावत संगणक</h4><p>High-Speed Internet सह Spacious Lab.</p></div>
+      <div class="feat-card vt rv"><span class="feat-icon">📹</span><h4>Webcam Lab</h4><p>Online Exam साठी Webcam-enabled Computers.</p></div>
+      <div class="feat-card vt rv"><span class="feat-icon">👆</span><h4>Biometric Attendance</h4><p>विद्यार्थी व शिक्षकांचे Biometric Attendance.</p></div>
+      <div class="feat-card vt rv"><span class="feat-icon">🔒</span><h4>CCTV Security</h4><p>संपूर्ण संस्थेत CCTV Coverage.</p></div>
+      <div class="feat-card vt rv"><span class="feat-icon">👨‍🏫</span><h4>Expert Faculty</h4><p>BCA, MCA, CA qualified शिक्षक.</p></div>
+      <div class="feat-card vt rv"><span class="feat-icon">💡</span><h4>Power Backup</h4><p>UPS Backup — शिक्षण कधीच थांबत नाही.</p></div>
+      <div class="feat-card vt rv"><span class="feat-icon">🏆</span><h4>MKCL Award Winner</h4><p>उत्कृष्ट केंद्र म्हणून महाराष्ट्र शासनाकडून सन्मान.</p></div>
+      <div class="feat-card vt rv"><span class="feat-icon">🌐</span><h4>MKCL Authorized</h4><p>MKCL, MSBTE व YCMOU मान्यताप्राप्त.</p></div>
+    </div>
+  </section>
+
+  <!-- Location -->
+  <section class="vt-sec rv" id="vt-location">
+    <div class="sec-head">
+      <div class="sec-tag vt-tag">आमचे केंद्र</div>
+      <h2 class="sec-title light-title">V-Tech — MIDC Road, Solapur</h2>
+    </div>
+    <div class="loc-card vt rv" style="max-width:600px;margin:0 auto;">
+      <div class="loc-head vt"><div class="loc-num">VT</div><div><h3>V-Tech Computer Institute</h3><p>निलम नगर, MIDC Road, Solapur</p></div></div>
+      <div class="loc-body">
+        <div class="loc-rows">
+          <div class="l-row"><div class="l-icon vt">📍</div><div><strong>पत्ता</strong><span>निलम नगर, लोकमंगल हॉस्पिटल समोर, एम.आय.डी.सी. रोड, सोलापूर</span></div></div>
+          <div class="l-row"><div class="l-icon vt">🏥</div><div><strong>Landmark</strong><span>लोकमंगल हॉस्पिटल समोर (Opposite Lokamangal Hospital)</span></div></div>
+          <div class="l-row"><div class="l-icon vt">⏰</div><div><strong>वेळ</strong><span>सोमवार–शनिवार: सकाळी 9:00 ते संध्याकाळी 7:00</span></div></div>
+          <div class="l-row"><div class="l-icon vt">📞</div><div><strong>संपर्क</strong><span>7875422159 — Kashinath Chappalge Sir</span></div></div>
+        </div>
+        <a href="tel:7875422159" class="call-btn vt">📞 7875422159 — Call Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="vt-sec-d rv" id="vt-about">
+    <div class="about-grid">
+      <div class="sir-card rv">
+        <div class="sir-av vt">KC</div>
+        <h3>Kashinath Chappalge Sir</h3>
+        <div class="sir-deg vt">BCA • MCA • CA</div>
+        <div class="sir-exp vt">25+ वर्षांचा संगणक शिक्षणाचा अनुभव.<br>MKCL, MSBTE, YCMOU Authorized.<br>हजारो विद्यार्थ्यांच्या करिअरचा शिल्पकार.</div>
+      </div>
+      <div class="about-text rv">
+        <div class="sec-tag vt-tag-d" style="margin-bottom:14px;">V-Tech बद्दल</div>
+        <h2 class="sec-title dark-title">उत्कृष्टतेचा वारसा</h2>
+        <p>महाराष्ट्र ज्ञान महामंडळाकडून (MKCL) उत्कृष्ट संगणक प्रशिक्षण केंद्र म्हणून सन्मानित — V-Tech Computer Institute हे सोलापूरमधील सर्वात विश्वासार्ह संस्थांपैकी एक. निलम नगर, MIDC Road येथे स्थित.</p>
+        <p>काशीनाथ चप्पलगे सर (BCA, MCA, CA) यांच्या कुशल नेतृत्वाखाली MS-CIT, Tally Prime, CCTP व Programming Courses उपलब्ध आहेत.</p>
+        <div class="acc-grid">
+          <div class="acc-item"><div class="acc-num vt">25+</div><div class="acc-lbl">वर्षे अनुभव</div></div>
+          <div class="acc-item"><div class="acc-num vt">4+</div><div class="acc-lbl">Certified Courses</div></div>
+          <div class="acc-item"><div class="acc-num vt">🏆</div><div class="acc-lbl">MKCL Award</div></div>
+          <div class="acc-item"><div class="acc-num vt">100%</div><div class="acc-lbl">Job Ready</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-sec vt rv">
+    <h2>V-Tech मध्ये आजच प्रवेश घ्या!</h2>
+    <p>मर्यादित जागा — आत्ता Call करा व तुमचा प्रवेश निश्चित करा</p>
+    <a class="cta-big" href="tel:7875422159">📞 7875422159</a>
+    <div class="cta-btns">
+      <a href="tel:7875422159" class="btn-wh vt">📞 Call Now — Book Seat</a>
+      <a href="#vt-courses" class="btn-ow">📚 Courses पाहा</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="vt-f">
+    <div class="footer-grid">
+      <div class="f-brand">
+        <div class="nav-logo"><div class="nl-box vt">VT</div><div class="nl-txt"><strong>V-Tech Computer Institute</strong><small>Solapur • Est. 2000</small></div></div>
+        <p>MKCL, MSBTE व YCMOU मान्यताप्राप्त — निलम नगर, MIDC Road, Soलापूर. Kashinath Chappalge Sir (BCA, MCA, CA).</p>
+      </div>
+      <div><h4>Courses</h4><ul class="flinks vt"><li><a href="#vt-courses">MS-CIT</a></li><li><a href="#vt-courses">Tally Prime GST</a></li><li><a href="#vt-courses">CCTP Typing</a></li><li><a href="#vt-courses">Programming</a></li></ul></div>
+      <div><h4>Links</h4><ul class="flinks vt"><li><a href="#vt-fees">Fees</a></li><li><a href="#vt-syllabus">Syllabus</a></li><li><a href="#vt-location">Location</a></li><li><a href="https://www.mkcl.org" target="_blank">MKCL Official</a></li></ul></div>
+      <div><h4>संपर्क</h4><div class="f-contact"><div class="f-ct">📞 7875422159</div><div class="f-ct">📍 निलम नगर, MIDC Road, Solapur</div><div class="f-ct">🏥 Lokamangal Hospital समोर</div><div class="f-ct">⏰ Mon–Sat: 9 AM – 7 PM</div></div></div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2025 V-Tech Computer Institute, Solapur.</p>
+      <div class="cert-pills"><span class="cpill">MKCL</span><span class="cpill">MSBTE</span><span class="cpill">YCMOU</span></div>
+    </div>
+  </footer>
+
+</div><!-- end page-vt -->
+
+
+<!-- ======================== PAGE: SVCS ======================== -->
+<div class="page" id="page-sc">
+
+  <!-- Ticker -->
+  <div class="ticker sc-t">
+    <div class="ticker-inner">
+      <span>प्रवेश सुरू — MS-CIT Batch 2025</span>
+      <span>Tally Prime with GST — नवीन Batch</span>
+      <span>CCTP Typing Proficiency</span>
+      <span>100% Job Readiness</span>
+      <span>MKCL व YCMOU मान्यताप्राप्त</span>
+      <span>संपर्क: 7875422159</span>
+      <span>S.V.C.S. D.Ed. College — Channeveer Nagar, Akkalkot Road</span>
+      <span>प्रवेश सुरू — MS-CIT Batch 2025</span>
+      <span>Tally Prime with GST — नवीन Batch</span>
+      <span>CCTP Typing Proficiency</span>
+      <span>100% Job Readiness</span>
+      <span>MKCL व YCMOU मान्यताप्राप्त</span>
+      <span>संपर्क: 7875422159</span>
+      <span>S.V.C.S. D.Ed. College — Channeveer Nagar, Akkalkot Road</span>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="sc-nav">
+    <div class="nav-logo">
+      <div class="nl-box sc">SC</div>
+      <div class="nl-txt">
+        <strong>S.V.C.S. D.Ed. College Computers</strong>
+        <small>Akkalkot Road, Solapur • MKCL</small>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#sc-courses">Courses</a></li>
+      <li><a href="#sc-fees">Fees</a></li>
+      <li><a href="#sc-syllabus">Syllabus</a></li>
+      <li><a href="#sc-location">Location</a></li>
+      <li><a href="#sc-about">About</a></li>
+    </ul>
+    <a href="tel:7875422159" class="nav-call sc">📞 7875422159</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero sc-hero">
+    <div class="hero-bg"></div>
+    <div class="hero-particles" id="sc-particles"></div>
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tag">
+          <div class="pulse-dot"></div>
+          <span>प्रवेश सुरू — 2025</span>
+        </div>
+        <h1>
+          शिकूया <span class="ai-badge">AI</span>ची क्रांती,<br>
+          चला करूया <em class="sc-em">MS-CIT</em>
+        </h1>
+        <p class="hero-sub">S.V.C.S. शिक्षण संकुल, D.Ed. College — चर्णवीर नगर, अक्कलकोट रोड, सोलापूर. MKCL व YCMOU मान्यताप्राप्त संस्था.</p>
+        <div class="hero-btns">
+          <a href="#sc-courses" class="btn-primary sc">📚 Courses पाहा →</a>
+          <a href="tel:7875422159" class="btn-ghost">📞 Call करा</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="inst-badge">
+          <div class="inst-icon">🏛️</div>
+          <h2>S.V.C.S. D.Ed. College Computers</h2>
+          <p>MKCL • MSBTE • YCMOU Certified</p>
+          <div class="sir-nm">Kashinath Chappalge Sir (BCA, MCA, CA)</div>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-box"><div class="stat-num">25+</div><div class="stat-lbl">वर्षे अनुभव</div></div>
+          <div class="stat-box"><div class="stat-num">2 Cr+</div><div class="stat-lbl">Students</div></div>
+          <div class="stat-box"><div class="stat-num">100%</div><div class="stat-lbl">Job Ready</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses -->
+  <section class="sc-sec-w rv" id="sc-courses">
+    <div class="sec-head">
+      <div class="sec-tag sc-tag">Courses — S.V.C.S.</div>
+      <h2 class="sec-title light-title">उत्कृष्ट प्रशिक्षण, उज्ज्वल भविष्य</h2>
+      <p class="sec-sub light-sub">MKCL, MSBTE आणि YCMOU मान्यताप्राप्त — सरकारी व खाजगी क्षेत्रात मान्यताप्राप्त प्रमाणपत्र.</p>
+    </div>
+    <div class="courses-grid">
+      <div class="c-card sc-card rv">
+        <div class="c-head o"><span class="c-icon">💻</span><h3>MS-CIT</h3><p>Maharashtra State Certificate in IT</p><span class="c-badge">MKCL Certified • Govt. Approved</span></div>
+        <div class="c-body">
+          <ul class="c-features sc-f">
+            <li>Windows 10, MS-Office 2019 — संपूर्ण</li>
+            <li>Google Tools आणि Smart Phone वापर</li>
+            <li>Internet, Email, Digital Banking</li>
+            <li>AI Tools — Artificial Intelligence परिचय</li>
+            <li>200+ Digital कौशल्यांचे प्रशिक्षण</li>
+            <li>शासकीय सेवेत प्रवेशासाठी अनिवार्य</li>
+          </ul>
+          <div class="c-fee-box sc-f"><div><div class="fee-lbl">Course Fee</div><div style="font-size:10px;color:#9CA3AF;">2 हप्त्यांत भरता येते</div></div><div><div class="fee-val sc">₹5,000</div><div class="fee-hint">किंवा 2×₹2,600</div></div></div>
+        </div>
+      </div>
+      <div class="c-card sc-card rv">
+        <div class="c-head b"><span class="c-icon">📊</span><h3>Tally Prime with GST</h3><p>Financial Accounting Complete Course</p><span class="c-badge">MKCL KLiC Diploma</span></div>
+        <div class="c-body">
+          <ul class="c-features sc-f">
+            <li>Introduction to Accounting & Tally Prime</li>
+            <li>GST Setup — GSTR1, GSTR2, GSTR3B</li>
+            <li>Company Data — Creation & Configuration</li>
+            <li>Statutory — TSS, TCS, TDS सर्व</li>
+            <li>Inventory, Order, Payroll Masters</li>
+            <li>Invoicing, Reports & Add-On Features</li>
+          </ul>
+          <div class="c-fee-box sc-f"><div><div class="fee-lbl">Course Fee</div><div style="font-size:10px;color:#9CA3AF;">2 हप्त्यांत भरता येते</div></div><div><div class="fee-val sc">₹5,000</div><div class="fee-hint">किंवा 2×₹2,600</div></div></div>
+        </div>
+      </div>
+      <div class="c-card sc-card rv">
+        <div class="c-head n"><span class="c-icon">⌨️</span><h3>CCTP — Typing Proficiency</h3><p>Certificate of Computer Typing Proficiency</p><span class="c-badge">MSBTE + MKCL Certified</span></div>
+        <div class="c-body">
+          <ul class="c-features sc-f">
+            <li>English Typing — 30 WPM</li>
+            <li>Marathi Typing — 40 WPM</li>
+            <li>Hindi Typing — 30 WPM</li>
+            <li>स्पीड, अचुकता व आत्मविश्वास प्रशिक्षण</li>
+            <li>MSBTE शासकीय प्रमाणपत्र</li>
+          </ul>
+          <div class="c-fee-box sc-f"><div><div class="fee-lbl">Course Fee</div><div style="font-size:10px;color:#9CA3AF;">MS-CIT सोबत उपलब्ध</div></div><div><div class="fee-val sc">₹5,000</div><div class="fee-hint">किंवा 2×₹2,600</div></div></div>
+        </div>
+      </div>
+      <div class="c-card sc-card rv">
+        <div class="c-head g"><span class="c-icon">👨‍💻</span><h3>Programming & KLiC</h3><p>C, C++, Java, Python, Mobile App Dev</p><span class="c-badge">KLiC BFSI • KLiC English • KLiC Digital</span></div>
+        <div class="c-body">
+          <ul class="c-features sc-f">
+            <li>C, C++, Java, Python Programming</li>
+            <li>Mobile App Development</li>
+            <li>Web Development — HTML, CSS, JS</li>
+            <li>Data Entry & Data Management</li>
+            <li>KLiC Personality Development</li>
+          </ul>
+          <div class="c-fee-box sc-f"><div><div class="fee-lbl">Course Fee</div><div style="font-size:10px;color:#9CA3AF;">विचारणा करा</div></div><div><div class="fee-val sc">₹5,000</div><div class="fee-hint">किंवा 2×₹2,600</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fees -->
+  <section class="sc-sec-d rv" id="sc-fees">
+    <div class="sec-head">
+      <div class="sec-tag sc-tag-d">Fees Structure</div>
+      <h2 class="sec-title dark-title">सोप्या हप्त्यांत शिका!</h2>
+      <p class="sec-sub dark-sub" style="margin:0 auto;max-width:500px;">एकत्र भरा किंवा 2 आरामदायक हप्त्यांत — कोणताही Hidden Charge नाही.</p>
+    </div>
+    <div class="fees-grid">
+      <div class="fee-card rv">
+        <div class="fee-card-hd sc"><div class="icon">💻</div><div><h3>MS-CIT / CCTP</h3><p>मुख्य Government Certified Courses</p></div></div>
+        <div class="fee-card-bd">
+          <div class="f-row"><div class="f-row-l">एकत्र (One-Time)</div><div class="f-row-v sc">₹5,000</div></div>
+          <div class="f-row"><div class="f-row-l">पहिला हप्ता (Admission वेळी)</div><div class="f-row-v sc">₹2,600</div></div>
+          <div class="f-row"><div class="f-row-l">दुसरा हप्ता (1 महिन्यानंतर)</div><div class="f-row-v sc">₹2,600</div></div>
+          <div class="f-total sc"><div class="f-total-lbl">एकूण शुल्क</div><div class="f-total-val">₹5,000</div></div>
+          <div class="fee-note">✓ SC/ST/OBC सवलत उपलब्ध &nbsp;|&nbsp; ✓ महिला विशेष सवलत &nbsp;|&nbsp; ✓ MKCL परीक्षा शुल्क वेगळे</div>
+        </div>
+      </div>
+      <div class="fee-card rv">
+        <div class="fee-card-hd sc"><div class="icon">📊</div><div><h3>Tally Prime / Programming</h3><p>Accounting व Job Readiness Courses</p></div></div>
+        <div class="fee-card-bd">
+          <div class="f-row"><div class="f-row-l">एकत्र (One-Time)</div><div class="f-row-v sc">₹5,000</div></div>
+          <div class="f-row"><div class="f-row-l">पहिला हप्ता (Admission वेळी)</div><div class="f-row-v sc">₹2,600</div></div>
+          <div class="f-row"><div class="f-row-l">दुसरा हप्ता (1 महिन्यानंतर)</div><div class="f-row-v sc">₹2,600</div></div>
+          <div class="f-total sc"><div class="f-total-lbl">एकूण शुल्क</div><div class="f-total-val">₹5,000</div></div>
+          <div class="fee-note">✓ MKCL KLiC Diploma मान्यताप्राप्त &nbsp;|&nbsp; ✓ Job Placement सहाय्य &nbsp;|&nbsp; ✓ Certificate मिळते</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Syllabus -->
+  <section class="sc-sec rv" id="sc-syllabus">
+    <div class="sec-head">
+      <div class="sec-tag sc-tag">अभ्यासक्रम</div>
+      <h2 class="sec-title light-title">काय शिकाल?</h2>
+    </div>
+    <div class="syl-tabs">
+      <button class="syl-tab sc-tab active" onclick="showSyl('sc','mscit',this)">MS-CIT</button>
+      <button class="syl-tab sc-tab" onclick="showSyl('sc','tally',this)">Tally Prime</button>
+      <button class="syl-tab sc-tab" onclick="showSyl('sc','cctp',this)">CCTP Typing</button>
+    </div>
+    <div class="syl-content active" id="sc-mscit">
+      <div class="syl-item sc"><div class="syl-num sc">01</div>Computer Basics & Windows 10</div>
+      <div class="syl-item sc"><div class="syl-num sc">02</div>MS Word 2019 — Document तयार करणे</div>
+      <div class="syl-item sc"><div class="syl-num sc">03</div>MS Excel 2019 — Spreadsheet & Formulas</div>
+      <div class="syl-item sc"><div class="syl-num sc">04</div>MS PowerPoint — Presentation Skills</div>
+      <div class="syl-item sc"><div class="syl-num sc">05</div>MS Access — Database Basics</div>
+      <div class="syl-item sc"><div class="syl-num sc">06</div>Internet & Email — Web Browsing</div>
+      <div class="syl-item sc"><div class="syl-num sc">07</div>Google Tools — Drive, Docs, Sheets</div>
+      <div class="syl-item sc"><div class="syl-num sc">08</div>Smart Phone — Apps & Digital Life</div>
+      <div class="syl-item sc"><div class="syl-num sc">09</div>Digital Banking & UPI Payments</div>
+      <div class="syl-item sc"><div class="syl-num sc">10</div>Cyber Security & Online Safety</div>
+      <div class="syl-item sc"><div class="syl-num sc">11</div>AI Tools — Artificial Intelligence परिचय</div>
+      <div class="syl-item sc"><div class="syl-num sc">12</div>E-Governance — Govt. Online Services</div>
+    </div>
+    <div class="syl-content" id="sc-tally">
+      <div class="syl-item sc"><div class="syl-num sc">01</div>Introduction to Accounting</div>
+      <div class="syl-item sc"><div class="syl-num sc">02</div>Tally Prime — Installation & Setup</div>
+      <div class="syl-item sc"><div class="syl-num sc">03</div>Company Data Creation & Configuration</div>
+      <div class="syl-item sc"><div class="syl-num sc">04</div>GST Setup & Transactions</div>
+      <div class="syl-item sc"><div class="syl-num sc">05</div>Accounting & Inventory Features</div>
+      <div class="syl-item sc"><div class="syl-num sc">06</div>TSS, TCS, TDS — Statutory</div>
+      <div class="syl-item sc"><div class="syl-num sc">07</div>GSTR1, GSTR2 & GSTR3B Reports</div>
+      <div class="syl-item sc"><div class="syl-num sc">08</div>Payroll Masters & Order Processing</div>
+      <div class="syl-item sc"><div class="syl-num sc">09</div>Menu Management, Vouchers</div>
+      <div class="syl-item sc"><div class="syl-num sc">10</div>Invoicing & Add-On Features</div>
+    </div>
+    <div class="syl-content" id="sc-cctp">
+      <div class="syl-item sc"><div class="syl-num sc">01</div>Keyboard Layout — Home Row Practice</div>
+      <div class="syl-item sc"><div class="syl-num sc">02</div>English Typing — 30 WPM Target</div>
+      <div class="syl-item sc"><div class="syl-num sc">03</div>Marathi Typing — 40 WPM Target</div>
+      <div class="syl-item sc"><div class="syl-num sc">04</div>Hindi Typing — 30 WPM Target</div>
+      <div class="syl-item sc"><div class="syl-num sc">05</div>Accuracy Training — Error Reduction</div>
+      <div class="syl-item sc"><div class="syl-num sc">06</div>MSBTE Exam Pattern & Mock Tests</div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="sc-sec-w rv">
+    <div class="sec-head">
+      <div class="sec-tag sc-tag">वैशिष्ट्ये</div>
+      <h2 class="sec-title light-title">S.V.C.S. का निवडावे?</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card sc rv"><span class="feat-icon">🏫</span><h4>D.Ed. College Campus</h4><p>S.V.C.S. शिक्षण संकुलात — सुरक्षित व शांत वातावरण.</p></div>
+      <div class="feat-card sc rv"><span class="feat-icon">💻</span><h4>20 अद्ययावत संगणक</h4><p>High-Speed Internet सह Spacious Lab.</p></div>
+      <div class="feat-card sc rv"><span class="feat-icon">👆</span><h4>Biometric Attendance</h4><p>विद्यार्थी व शिक्षकांचे Biometric Attendance.</p></div>
+      <div class="feat-card sc rv"><span class="feat-icon">🔒</span><h4>CCTV Security</h4><p>संपूर्ण Campus मध्ये CCTV Coverage.</p></div>
+      <div class="feat-card sc rv"><span class="feat-icon">👨‍🏫</span><h4>Expert Faculty</h4><p>BCA, MCA, CA qualified शिक्षक.</p></div>
+      <div class="feat-card sc rv"><span class="feat-icon">📹</span><h4>Webcam Lab</h4><p>Online Exam साठी Webcam-enabled Computers.</p></div>
+      <div class="feat-card sc rv"><span class="feat-icon">🏆</span><h4>MKCL Award Winner</h4><p>उत्कृष्ट केंद्र म्हणून महाराष्ट्र शासनाकडून सन्मान.</p></div>
+      <div class="feat-card sc rv"><span class="feat-icon">🌐</span><h4>MKCL Authorized</h4><p>MKCL, MSBTE व YCMOU मान्यताप्राप्त.</p></div>
+    </div>
+  </section>
+
+  <!-- Location -->
+  <section class="sc-sec rv" id="sc-location">
+    <div class="sec-head">
+      <div class="sec-tag sc-tag">आमचे केंद्र</div>
+      <h2 class="sec-title light-title">S.V.C.S. — Channeveer Nagar, Solapur</h2>
+    </div>
+    <div class="loc-card sc rv" style="max-width:600px;margin:0 auto;">
+      <div class="loc-head sc"><div class="loc-num">SC</div><div><h3>S.V.C.S. D.Ed. College Computers</h3><p>चर्णवीर नगर, अक्कलकोट रोड, सोलापूर</p></div></div>
+      <div class="loc-body">
+        <div class="loc-rows">
+          <div class="l-row"><div class="l-icon sc">📍</div><div><strong>पत्ता</strong><span>एस.व्ही.सी.एस. शिक्षण संकुल, D.Ed. College, दुसरा मजला, चर्णवीर नगर, अक्कलकोट रोड, सोलापूर</span></div></div>
+          <div class="l-row"><div class="l-icon sc">🏫</div><div><strong>स्थान</strong><span>D.Ed. College — दुसरा मजला (2nd Floor), S.V.C.S. Campus</span></div></div>
+          <div class="l-row"><div class="l-icon sc">⏰</div><div><strong>वेळ</strong><span>सोमवार–शनिवार: सकाळी 9:00 ते संध्याकाळी 7:00</span></div></div>
+          <div class="l-row"><div class="l-icon sc">📞</div><div><strong>संपर्क</strong><span>7875422159 — Kashinath Chappalge Sir</span></div></div>
+        </div>
+        <a href="tel:7875422159" class="call-btn sc">📞 7875422159 — Call Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="sc-sec-d rv" id="sc-about">
+    <div class="about-grid">
+      <div class="sir-card rv">
+        <div class="sir-av sc">KC</div>
+        <h3>Kashinath Chappalge Sir</h3>
+        <div class="sir-deg sc">BCA • MCA • CA</div>
+        <div class="sir-exp sc">25+ वर्षांचा संगणक शिक्षणाचा अनुभव.<br>MKCL, MSBTE, YCMOU Authorized.<br>हजारो विद्यार्थ्यांच्या करिअरचा शिल्पकार.</div>
+      </div>
+      <div class="about-text rv">
+        <div class="sec-tag sc-tag-d" style="margin-bottom:14px;">S.V.C.S. बद्दल</div>
+        <h2 class="sec-title dark-title">शिक्षणाचा विश्वासार्ह वारसा</h2>
+        <p>S.V.C.S. शिक्षण संकुल, D.Ed. College येथे स्थित — चर्णवीर नगर, अक्कलकोट रोड, सोलापूर. महाराष्ट्र ज्ञान महामंडळाकडून (MKCL) उत्कृष्ट प्रशिक्षण केंद्र म्हणून सन्मानित.</p>
+        <p>काशीनाथ चप्पलगे सर (BCA, MCA, CA) यांच्या नेतृत्वाखाली MS-CIT, Tally Prime, CCTP व Programming Courses उपलब्ध. College Campus मध्ये शांत व सुरक्षित वातावरणात शिका.</p>
+        <div class="acc-grid">
+          <div class="acc-item"><div class="acc-num sc">25+</div><div class="acc-lbl">वर्षे अनुभव</div></div>
+          <div class="acc-item"><div class="acc-num sc">4+</div><div class="acc-lbl">Certified Courses</div></div>
+          <div class="acc-item"><div class="acc-num sc">🏆</div><div class="acc-lbl">MKCL Award</div></div>
+          <div class="acc-item"><div class="acc-num sc">100%</div><div class="acc-lbl">Job Ready</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-sec sc rv">
+    <h2>S.V.C.S. मध्ये आजच प्रवेश घ्या!</h2>
+    <p>मर्यादित जागा — आत्ता Call करा व तुमचा प्रवेश निश्चित करा</p>
+    <a class="cta-big" href="tel:7875422159">📞 7875422159</a>
+    <div class="cta-btns">
+      <a href="tel:7875422159" class="btn-wh sc">📞 Call Now — Book Seat</a>
+      <a href="#sc-courses" class="btn-ow">📚 Courses पाहा</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="sc-f">
+    <div class="footer-grid">
+      <div class="f-brand">
+        <div class="nav-logo"><div class="nl-box sc">SC</div><div class="nl-txt"><strong>S.V.C.S. D.Ed. College Computers</strong><small>Solapur • MKCL Certified</small></div></div>
+        <p>MKCL, MSBTE व YCMOU मान्यताप्राप्त — चर्णवीर नगर, अक्कलकोट रोड, सोलापूर. Kashinath Chappalge Sir (BCA, MCA, CA).</p>
+      </div>
+      <div><h4>Courses</h4><ul class="flinks sc"><li><a href="#sc-courses">MS-CIT</a></li><li><a href="#sc-courses">Tally Prime GST</a></li><li><a href="#sc-courses">CCTP Typing</a></li><li><a href="#sc-courses">Programming</a></li></ul></div>
+      <div><h4>Links</h4><ul class="flinks sc"><li><a href="#sc-fees">Fees</a></li><li><a href="#sc-syllabus">Syllabus</a></li><li><a href="#sc-location">Location</a></li><li><a href="https://www.mkcl.org" target="_blank">MKCL Official</a></li></ul></div>
+      <div><h4>संपर्क</h4><div class="f-contact"><div class="f-ct">📞 7875422159</div><div class="f-ct">📍 चर्णवीर नगर, अक्कलकोट रोड, सोलापूर</div><div class="f-ct">🏫 D.Ed. College, 2nd Floor</div><div class="f-ct">⏰ Mon–Sat: 9 AM – 7 PM</div></div></div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2025 S.V.C.S. D.Ed. College Computers, Solapur.</p>
+      <div class="cert-pills"><span class="cpill">MKCL</span><span class="cpill">MSBTE</span><span class="cpill">YCMOU</span></div>
+    </div>
+  </footer>
+
+</div><!-- end page-sc -->
+
+<script>
+// Preloader
+window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('hide'),1800));
+
+// Page switcher
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sw-half').forEach(s=>s.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelector('.sw-half.'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(triggerReveal,200);
+}
+
+// Particles
+function makeParticles(id,color){
+  const c=document.getElementById(id);
+  if(!c)return;
+  for(let i=0;i<16;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    p.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;background:${color};animation-delay:${Math.random()*5}s;animation-duration:${4+Math.random()*4}s;`;
+    c.appendChild(p);
+  }
+}
+makeParticles('vt-particles','#FF6B00');
+makeParticles('sc-particles','#FFD700');
+
+// Reveal on scroll
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});},{threshold:0.07});
+function triggerReveal(){document.querySelectorAll('.rv,.rvl,.rvr').forEach(el=>obs.observe(el));}
+triggerReveal();
+
+// Syllabus tabs
+function showSyl(prefix,id,btn){
+  document.querySelectorAll('#page-'+prefix+' .syl-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('#page-'+prefix+' .syl-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(prefix+'-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
